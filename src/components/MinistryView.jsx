@@ -7,7 +7,7 @@ import ContextPanel from "./ContextPanel";
 /**
  * Tab B: Functions → Ministries with drill-down into ministry internals.
  */
-export default function MinistryView({ data }) {
+export default function MinistryView({ data, displayMode, setDisplayMode }) {
   const { functions, ministries, total } = data;
 
   const [hover, setHover] = useState(null);
@@ -94,7 +94,7 @@ export default function MinistryView({ data }) {
   const rightLabel = drill ? "内訳" : "所管省庁";
 
   return (
-    <>
+    <div style={{ maxWidth: w }}>
       {drill && (
         <div
           style={{
@@ -127,7 +127,7 @@ export default function MinistryView({ data }) {
             {drill.label}
           </span>
           <span style={{ color: "#475569", fontSize: 10 }}>
-            {fmt(drill.value)}
+            {displayMode === "pct" ? pct(drill.value, total) : fmt(drill.value)}
           </span>
         </div>
       )}
@@ -172,6 +172,9 @@ export default function MinistryView({ data }) {
         setHover={setHover}
         onDrill={handleDrill}
         drillableIds={drillableIds}
+        displayMode={displayMode}
+        setDisplayMode={setDisplayMode}
+        total={data.total}
       />
 
       {/* Guide text */}
@@ -193,7 +196,9 @@ export default function MinistryView({ data }) {
               {drill.label}
             </span>
             の所管予算
-            <span style={{ fontWeight: 700 }}>{fmt(drill.value)}</span>
+            <span style={{ fontWeight: 700 }}>
+              {displayMode === "pct" ? pct(drill.value, total) : fmt(drill.value)}
+            </span>
             （歳出全体の{pct(drill.value, total)}）の内訳。
             <span style={{ color: "#94a3b8" }}>
               {texts.ministries[drill.id]?.guide || ""}
@@ -227,6 +232,6 @@ export default function MinistryView({ data }) {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

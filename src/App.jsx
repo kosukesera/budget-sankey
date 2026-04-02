@@ -5,12 +5,13 @@ import FuncView from "./components/FuncView";
 import MinistryView from "./components/MinistryView";
 
 const TABS = [
-  { key: "func", label: "歳入→使いみち" },
-  { key: "ministry", label: "使いみち→省庁" },
+  { key: "func", label: "歳入→歳出（使途別）" },
+  { key: "ministry", label: "歳出（省庁別）" },
 ];
 
 export default function App() {
   const [tab, setTab] = useState("func");
+  const [displayMode, setDisplayMode] = useState("yen");
   const { data, loading, error } = useBudgetData("fy2025");
 
   if (loading) {
@@ -130,9 +131,9 @@ export default function App() {
 
         {/* Active View */}
         {tab === "func" ? (
-          <FuncView data={data} />
+          <FuncView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} />
         ) : (
-          <MinistryView data={data} />
+          <MinistryView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} />
         )}
 
         {/* Footer */}

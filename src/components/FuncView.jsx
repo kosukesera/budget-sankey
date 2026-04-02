@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { MINISTRY_MAP } from "../data/ministries";
 import texts from "../data/texts.json";
-import { fmt } from "../lib/format";
+import { fmt, pct } from "../lib/format";
 import SankeyView from "./SankeyView";
 import ContextPanel from "./ContextPanel";
 import Breadcrumb from "./Breadcrumb";
@@ -9,7 +9,7 @@ import Breadcrumb from "./Breadcrumb";
 /**
  * Tab A: Revenue → Expenditure (functional) with 3-level drill-down.
  */
-export default function FuncView({ data }) {
+export default function FuncView({ data, displayMode, setDisplayMode }) {
   const { revenue, expenditure } = data;
 
   const [hover, setHover] = useState(null);
@@ -144,7 +144,7 @@ export default function FuncView({ data }) {
   const depth = path.length;
 
   return (
-    <>
+    <div style={{ maxWidth: w }}>
       {/* Depth indicator */}
       <div
         style={{
@@ -216,6 +216,9 @@ export default function FuncView({ data }) {
         setHover={setHover}
         onDrill={handleDrill}
         drillableIds={drillableIds}
+        displayMode={displayMode}
+        setDisplayMode={setDisplayMode}
+        total={data.total}
       />
 
       {/* Ministry legend */}
@@ -277,7 +280,9 @@ export default function FuncView({ data }) {
             </span>
             の所管予算
             <span style={{ fontWeight: 700 }}>
-              {fmt(path[path.length - 1].value)}
+              {displayMode === "pct"
+                ? pct(path[path.length - 1].value, data.total)
+                : fmt(path[path.length - 1].value)}
             </span>
             の内訳。
           </>
@@ -309,6 +314,6 @@ export default function FuncView({ data }) {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

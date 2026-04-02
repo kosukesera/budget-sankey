@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { calcLayout } from "../lib/layout";
-import { fmt } from "../lib/format";
+import { fmt, pct } from "../lib/format";
 import SearchIcon from "./SearchIcon";
+import DisplayToggle from "./DisplayToggle";
 
 /**
  * SVG Sankey diagram renderer.
@@ -17,11 +18,26 @@ export default function SankeyView({
   setHover,
   onDrill,
   drillableIds,
+  displayMode = "yen",
+  setDisplayMode,
+  total,
 }) {
   const { left, right, links } = useMemo(
     () => calcLayout(leftItems, rightItems, w, h),
     [leftItems, rightItems, w, h]
   );
+
+  // Compute column sums for percentage display
+  const leftSum = useMemo(() => leftItems.reduce((s, i) => s + i.value, 0), [leftItems]);
+  const rightSum = useMemo(() => rightItems.reduce((s, i) => s + i.value, 0), [rightItems]);
+
+  const fmtVal = (nd) => {
+    if (displayMode === "pct") {
+      const colSum = nd.x < w / 2 ? leftSum : rightSum;
+      return pct(nd.value, colSum);
+    }
+    return fmt(nd.value);
+  };
 
   const isActive = (id) => !hover || hover === id;
   const isLinkActive = (l) =>
@@ -43,8 +59,9 @@ export default function SankeyView({
     if (!hoveredNode) return null;
     const nd = hoveredNode;
     const isLeft = nd.x < w / 2;
-    const tipW = canDrillHovered ? 158 : 128;
-    const tipH = canDrillHovered ? 38 : 22;
+    const hasGlobalPct = displayMode === "pct" && total;
+    const tipW = canDrillHovered ? 180 : hasGlobalPct ? 170 : 128;
+    const tipH = canDrillHovered ? (hasGlobalPct ? 50 : 38) : (hasGlobalPct ? 36 : 22);
 
     // Place tooltip on the inner side of the node (toward center of diagram)
     let tx, ty;
@@ -57,7 +74,7 @@ export default function SankeyView({
     ty = Math.max(4, Math.min(h - tipH - 4, nd.y + nd.height / 2 - tipH / 2));
 
     return { x: tx, y: ty, w: tipW, h: tipH };
-  }, [hoveredNode, canDrillHovered, w, h]);
+  }, [hoveredNode, canDrillHovered, w, h, displayMode, total]);
 
   return (
     <>
@@ -177,7 +194,7 @@ export default function SankeyView({
                   opacity={active ? 0.7 : 0.1}
                   style={{ transition: "opacity 0.3s", pointerEvents: "none" }}
                 >
-                  {fmt(nd.value)}
+                  {fmtVal(nd)}
                 </text>
               )}
             </g>
@@ -202,10 +219,15 @@ export default function SankeyView({
               strokeWidth={0.5}
             />
             <text x={8} y={15} fill="#e2e8f0" fontSize={10.5} fontWeight={600}>
-              {hoveredNode.label}  {fmt(hoveredNode.value)}
+              {hoveredNode.label}  {fmtVal(hoveredNode)}
             </text>
+            {displayMode === "pct" && total && (
+              <text x={8} y={29} fill="#94a3b8" fontSize={9}>
+                （歳出全体の{pct(hoveredNode.value, total)}）
+              </text>
+            )}
             {canDrillHovered && (
-              <text x={8} y={30} fill="#60a5fa" fontSize={9.5}>
+              <text x={8} y={displayMode === "pct" && total ? 43 : 30} fill="#60a5fa" fontSize={9.5}>
                 ダブルクリックで詳細を表示
               </text>
             )}
@@ -213,13 +235,14 @@ export default function SankeyView({
         )}
       </svg>
 
-      {/* Right-side item list */}
+      {/* Right-side item list + display toggle */}
       {rightNodes.length > 1 && (
         <div
           style={{
             marginTop: 6,
             display: "flex",
             flexWrap: "wrap",
+            alignItems: "center",
             gap: 4,
             padding: "6px 10px",
             background: "#131620",
@@ -249,11 +272,16 @@ export default function SankeyView({
               >
                 {nd.label}
                 <span style={{ color: "#64748b", marginLeft: 4, fontSize: 9 }}>
-                  {fmt(nd.value)}
+                  {displayMode === "pct" ? pct(nd.value, rightSum) : fmt(nd.value)}
                 </span>
               </button>
             );
           })}
+          {setDisplayMode && (
+            <div style={{ marginLeft: "auto" }}>
+              <DisplayToggle displayMode={displayMode} setDisplayMode={setDisplayMode} />
+            </div>
+          )}
         </div>
       )}
     </>
