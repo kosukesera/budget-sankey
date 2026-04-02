@@ -126,7 +126,7 @@ export default function SankeyView({
             <g
               key={nd.id}
               onMouseEnter={() => setHover(nd.id)}
-              onDoubleClick={canDrill ? () => onDrill(nd.id) : undefined}
+              onClick={canDrill ? () => onDrill(nd.id) : undefined}
               style={{ cursor: canDrill ? "pointer" : "default" }}
             >
               <rect
@@ -228,7 +228,7 @@ export default function SankeyView({
             )}
             {canDrillHovered && (
               <text x={8} y={displayMode === "pct" && total ? 43 : 30} fill="#60a5fa" fontSize={9.5}>
-                ダブルクリックで詳細を表示
+                クリックで詳細を表示
               </text>
             )}
           </g>
@@ -257,7 +257,7 @@ export default function SankeyView({
                 key={nd.id}
                 onMouseEnter={() => setHover(nd.id)}
                 onMouseLeave={() => setHover(null)}
-                onDoubleClick={canDrill ? () => onDrill(nd.id) : undefined}
+                onClick={canDrill ? () => onDrill(nd.id) : undefined}
                 style={{
                   background: hover === nd.id ? "#1e293b" : "transparent",
                   border: `1px solid ${hover === nd.id ? nd.color || "#475569" : "#1e293b"}`,

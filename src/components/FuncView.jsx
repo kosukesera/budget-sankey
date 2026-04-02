@@ -310,7 +310,7 @@ export default function FuncView({ data, displayMode, setDisplayMode }) {
             <span style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
               下線付き🔍
             </span>{" "}
-            の項目はダブルクリックでさらに展開
+            の項目はクリックでさらに展開
           </>
         )}
       </div>

@@ -76,7 +76,7 @@ export default function MinistryView({ data, displayMode, setDisplayMode }) {
       }
       return { ctx: texts.defaults.ministry, label: null, color: null };
     }
-    // Check ministries text
+    // Check ministries text (top-level)
     const mTexts = texts.ministries[hover];
     if (mTexts?.ctx) {
       const item = ministries.find((m) => m.id === hover);
@@ -85,6 +85,18 @@ export default function MinistryView({ data, displayMode, setDisplayMode }) {
         label: item?.label || hover,
         color: item?.color || null,
       };
+    }
+    // Check ministry breakdown text (drill children)
+    if (drill) {
+      const bTexts = texts.ministryBreakdown?.[hover];
+      if (bTexts) {
+        const child = drill.children?.find((c) => c.id === hover);
+        return {
+          ctx: bTexts,
+          label: child?.label || hover,
+          color: child?.color || drill.color,
+        };
+      }
     }
     return { ctx: texts.defaults.ministry, label: null, color: null };
   };
@@ -228,7 +240,7 @@ export default function MinistryView({ data, displayMode, setDisplayMode }) {
             <span style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
               下線🔍
             </span>{" "}
-            の省庁はダブルクリックで内訳を展開
+            の省庁はクリックで内訳を展開
           </>
         )}
       </div>
