@@ -1,6 +1,12 @@
 {
   "latestYear": "fy2025",
   "years": [
-    { "key": "fy2025", "label": "令和7年度（2025）", "file": "fy2025.json" }
+    { "key": "fy2025", "label": "令和7年度（2025）", "file": "fy2025.json" },
+    { "key": "fy2024", "label": "令和6年度（2024）", "file": "fy2024.json" },
+    { "key": "fy2023", "label": "令和5年度（2023）", "file": "fy2023.json" },
+    { "key": "fy2022", "label": "令和4年度（2022）", "file": "fy2022.json" },
+    { "key": "fy2021", "label": "令和3年度（2021）", "file": "fy2021.json" },
+    { "key": "fy2020", "label": "令和2年度（2020）", "file": "fy2020.json" },
+    { "key": "fy2019", "label": "令和元年度（2019）", "file": "fy2019.json" }
   ]
 }

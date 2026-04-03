@@ -3,16 +3,13 @@ import useBudgetData from "./hooks/useBudgetData";
 import { fmt } from "./lib/format";
 import FuncView from "./components/FuncView";
 import MinistryView from "./components/MinistryView";
-
-const TABS = [
-  { key: "func", label: "歳入→歳出（使途別）" },
-  { key: "ministry", label: "歳出（省庁別）" },
-];
+import { TABS, YEARS } from "./constants";
 
 export default function App() {
   const [tab, setTab] = useState("func");
   const [displayMode, setDisplayMode] = useState("yen");
-  const { data, loading, error } = useBudgetData("fy2025");
+  const [yearKey, setYearKey] = useState("fy2025");
+  const { data, loading, error } = useBudgetData(yearKey);
 
   if (loading) {
     return (
@@ -74,18 +71,40 @@ export default function App() {
           >
             Japan Budget Explorer
           </div>
-          <h1
-            style={{
-              fontSize: Math.min(24, w * 0.03),
-              fontWeight: 800,
-              margin: "1px 0",
-              background: "linear-gradient(135deg,#e2e8f0,#94a3b8)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            令和7年度 一般会計予算
-          </h1>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+            <h1
+              style={{
+                fontSize: Math.min(24, w * 0.03),
+                fontWeight: 800,
+                margin: "1px 0",
+                background: "linear-gradient(135deg,#e2e8f0,#94a3b8)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              一般会計予算
+            </h1>
+            <select
+              value={yearKey}
+              onChange={(e) => setYearKey(e.target.value)}
+              style={{
+                background: "#1e293b",
+                border: "1px solid #475569",
+                borderRadius: 5,
+                color: "#e2e8f0",
+                fontSize: 13,
+                fontWeight: 600,
+                padding: "3px 8px",
+                cursor: "pointer",
+              }}
+            >
+              {YEARS.map((y) => (
+                <option key={y.key} value={y.key}>
+                  {y.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div style={{ fontSize: 12, color: "#64748b" }}>
             歳入歳出総額{" "}
             <span
@@ -131,9 +150,9 @@ export default function App() {
 
         {/* Active View */}
         {tab === "func" ? (
-          <FuncView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} />
+          <FuncView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} yearKey={yearKey} />
         ) : (
-          <MinistryView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} />
+          <MinistryView data={data} displayMode={displayMode} setDisplayMode={setDisplayMode} yearKey={yearKey} />
         )}
 
         {/* Footer */}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { MINISTRY_MAP } from "../data/ministries";
-import texts from "../data/texts.json";
+import allTexts from "../data/texts";
+import { TABS } from "../constants";
 import { fmt, pct } from "../lib/format";
 import SankeyView from "./SankeyView";
 import ContextPanel from "./ContextPanel";
@@ -9,7 +10,8 @@ import Breadcrumb from "./Breadcrumb";
 /**
  * Tab A: Revenue → Expenditure (functional) with 3-level drill-down.
  */
-export default function FuncView({ data, displayMode, setDisplayMode }) {
+export default function FuncView({ data, displayMode, setDisplayMode, yearKey }) {
+  const texts = allTexts[yearKey] || allTexts.fy2025;
   const { revenue, expenditure } = data;
 
   const [hover, setHover] = useState(null);
@@ -287,7 +289,7 @@ export default function FuncView({ data, displayMode, setDisplayMode }) {
             の内訳。
           </>
         ) : (
-          texts.defaults.func.guide
+          texts.defaults.func.guide.replace("{TAB_MINISTRY}", TABS.find(t => t.key === "ministry").label)
         )}
       </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import texts from "../data/texts.json";
+import allTexts from "../data/texts";
 import { fmt, pct } from "../lib/format";
 import SankeyView from "./SankeyView";
 import ContextPanel from "./ContextPanel";
@@ -7,7 +7,8 @@ import ContextPanel from "./ContextPanel";
 /**
  * Tab B: Functions → Ministries with drill-down into ministry internals.
  */
-export default function MinistryView({ data, displayMode, setDisplayMode }) {
+export default function MinistryView({ data, displayMode, setDisplayMode, yearKey }) {
+  const texts = allTexts[yearKey] || allTexts.fy2025;
   const { functions, ministries, total } = data;
 
   const [hover, setHover] = useState(null);

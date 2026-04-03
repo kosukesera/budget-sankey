@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore, useRef } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 const cache = {};
 const listeners = new Set();
@@ -17,16 +17,17 @@ function notify() {
 /**
  * Fetch and cache budget JSON data for a given fiscal year.
  */
-export default function useBudgetData(yearKey = "fy2025") {
-  const fetchedRef = useRef(false);
+// Track which years have been fetched (or are in-flight)
+const fetchedKeys = new Set();
 
+export default function useBudgetData(yearKey = "fy2025") {
   const data = useSyncExternalStore(subscribe, () => cache[yearKey] || null);
   const loading = useSyncExternalStore(subscribe, () => loadingState[yearKey] ?? !cache[yearKey]);
   const error = useSyncExternalStore(subscribe, () => errorState[yearKey] || null);
 
   useEffect(() => {
-    if (cache[yearKey] || fetchedRef.current) return;
-    fetchedRef.current = true;
+    if (cache[yearKey] || fetchedKeys.has(yearKey)) return;
+    fetchedKeys.add(yearKey);
 
     loadingState[yearKey] = true;
     errorState[yearKey] = null;

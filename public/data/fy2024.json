@@ -1,0 +1,322 @@
+{
+  "fiscalYear": "令和6年度（2024）",
+  "total": 1125717,
+  "unit": "億円",
+  "source": "財務省「令和6年度予算のポイント」、衆議院調査室、各省庁予算概要。一部概算外含む。",
+  "revenue": [
+    { "id": "r_con", "label": "消費税", "value": 234440, "color": "#38bdf8" },
+    { "id": "r_inc", "label": "所得税", "value": 175350, "color": "#60a5fa" },
+    { "id": "r_cor", "label": "法人税", "value": 171900, "color": "#818cf8" },
+    { "id": "r_oth", "label": "その他税収", "value": 114390, "color": "#a78bfa" },
+    { "id": "r_bnd", "label": "公債金", "value": 354490, "color": "#f472b6" },
+    { "id": "r_etc", "label": "その他収入", "value": 75147, "color": "#c084fc" }
+  ],
+  "expenditure": [
+    {
+      "id": "e_ss", "label": "社会保障", "value": 376344, "color": "#f97316",
+      "children": [
+        { "id": "ss_pen", "label": "年金給付費", "value": 134020, "ministry": "mhlw" },
+        { "id": "ss_med", "label": "医療給付費", "value": 122366, "ministry": "mhlw",
+          "children": [
+            { "id": "med_insure", "label": "医療保険給付", "value": 87500, "ministry": "mhlw" },
+            { "id": "med_kaigo_i", "label": "後期高齢者医療", "value": 18700, "ministry": "mhlw" },
+            { "id": "med_public", "label": "公費負担医療", "value": 8700, "ministry": "mhlw" },
+            { "id": "med_other", "label": "その他医療対策", "value": 7466, "ministry": "mhlw" }
+          ]
+        },
+        { "id": "ss_wel", "label": "生活扶助等社会福祉費", "value": 44912, "ministry": "mhlw",
+          "children": [
+            { "id": "wel_disable", "label": "障害福祉サービス", "value": 22500, "ministry": "mhlw" },
+            { "id": "wel_protect", "label": "生活保護費", "value": 15400, "ministry": "mhlw" },
+            { "id": "wel_other", "label": "その他福祉", "value": 7012, "ministry": "mhlw" }
+          ]
+        },
+        { "id": "ss_nur", "label": "介護給付費", "value": 37188, "ministry": "mhlw",
+          "children": [
+            { "id": "nur_benefit", "label": "介護保険給付国庫負担", "value": 33400, "ministry": "mhlw" },
+            { "id": "nur_facility", "label": "介護施設整備(基金)", "value": 520, "ministry": "mhlw" },
+            { "id": "nur_other", "label": "介護予防・地域支援等", "value": 3268, "ministry": "mhlw" }
+          ]
+        },
+        { "id": "ss_chi", "label": "少子化対策費", "value": 33823, "ministry": "cfa",
+          "children": [
+            { "id": "chi_allow", "label": "児童手当", "value": 6800, "ministry": "cfa" },
+            { "id": "chi_nursery", "label": "保育所等運営費", "value": 9200, "ministry": "cfa" },
+            { "id": "chi_aftersch", "label": "放課後児童クラブ等", "value": 2800, "ministry": "cfa" },
+            { "id": "chi_higher_ed", "label": "高等教育負担軽減", "value": 2500, "ministry": "mext" },
+            { "id": "chi_leave", "label": "育休給付拡充", "value": 1800, "ministry": "cfa" },
+            { "id": "chi_preg", "label": "妊婦支援給付(10万円)", "value": 750, "ministry": "cfa" },
+            { "id": "chi_everyone", "label": "こども誰でも通園", "value": 173, "ministry": "cfa" },
+            { "id": "chi_other", "label": "その他少子化対策", "value": 9800, "ministry": "cfa" }
+          ]
+        },
+        { "id": "ss_hea", "label": "保健衛生対策費", "value": 3480, "ministry": "mhlw" },
+        { "id": "ss_emp", "label": "雇用労災対策費", "value": 555, "ministry": "mhlw" }
+      ]
+    },
+    {
+      "id": "e_debt", "label": "国債費", "value": 270009, "color": "#ef4444",
+      "children": [
+        { "id": "debt_red", "label": "債務償還費", "value": 176509, "ministry": "mof" },
+        { "id": "debt_int", "label": "利払費等", "value": 93500, "ministry": "mof" }
+      ]
+    },
+    {
+      "id": "e_loc", "label": "地方交付税交付金等", "value": 174547, "color": "#eab308",
+      "children": [
+        { "id": "loc_main", "label": "地方交付税", "value": 170547, "ministry": "mic" },
+        { "id": "loc_sp", "label": "地方特例交付金等", "value": 4000, "ministry": "mic" }
+      ]
+    },
+    {
+      "id": "e_def", "label": "防衛", "value": 79193, "color": "#22c55e",
+      "children": [
+        { "id": "def_eq", "label": "装備品等取得", "value": 25300, "ministry": "mod",
+          "children": [
+            { "id": "eq_satcon", "label": "衛星コンステレーション(PFI)", "value": 2000, "ministry": "mod" },
+            { "id": "eq_hyper_mfg", "label": "極超音速誘導弾", "value": 1500, "ministry": "mod" },
+            { "id": "eq_aegis", "label": "イージス・システム搭載艦", "value": 2200, "ministry": "mod" },
+            { "id": "eq_p1", "label": "固定翼哨戒機 P-1", "value": 700, "ministry": "mod" },
+            { "id": "eq_sm3", "label": "SM-3ブロックⅡA(BMD迎撃)", "value": 680, "ministry": "mod" },
+            { "id": "eq_03sam", "label": "03式中距離地対空誘導弾", "value": 600, "ministry": "mod" },
+            { "id": "eq_hyper_dev", "label": "極超音速誘導弾 開発", "value": 500, "ministry": "mod" },
+            { "id": "eq_pac3", "label": "PAC-3MSEミサイル", "value": 380, "ministry": "mod" },
+            { "id": "eq_mq9b", "label": "MQ-9B シーガーディアン(UAV)", "value": 340, "ministry": "mod" },
+            { "id": "eq_ship", "label": "新型海上輸送艦", "value": 350, "ministry": "mod" },
+            { "id": "eq_sub", "label": "潜水艦(たいげい型)", "value": 750, "ministry": "mod" },
+            { "id": "eq_other", "label": "その他装備品", "value": 15300, "ministry": "mod" }
+          ]
+        },
+        { "id": "def_per", "label": "人件・糧食費", "value": 21900, "ministry": "mod" },
+        { "id": "def_mai", "label": "維持整備・弾薬確保", "value": 13500, "ministry": "mod",
+          "children": [
+            { "id": "mai_ammo", "label": "各種弾薬確保", "value": 4800, "ministry": "mod" },
+            { "id": "mai_repair", "label": "装備品維持整備", "value": 6400, "ministry": "mod" },
+            { "id": "mai_other", "label": "施設維持等", "value": 2300, "ministry": "mod" }
+          ]
+        },
+        { "id": "def_rnd", "label": "研究開発費", "value": 7800, "ministry": "mod",
+          "children": [
+            { "id": "rnd_gcap", "label": "次期戦闘機(GCAP/日英伊)", "value": 1800, "ministry": "mod" },
+            { "id": "rnd_cyber", "label": "サイバー領域", "value": 2100, "ministry": "mod" },
+            { "id": "rnd_break", "label": "ブレークスルー研究", "value": 200, "ministry": "mod" },
+            { "id": "rnd_other", "label": "その他研究開発", "value": 3700, "ministry": "mod" }
+          ]
+        },
+        { "id": "def_fac", "label": "施設整備等", "value": 4800, "ministry": "mod" },
+        { "id": "def_base", "label": "基地対策・SACO等", "value": 5893, "ministry": "mod" }
+      ]
+    },
+    {
+      "id": "e_pw", "label": "公共事業", "value": 60828, "color": "#14b8a6",
+      "children": [
+        { "id": "pw_road", "label": "道路整備", "value": 16200, "ministry": "mlit" },
+        { "id": "pw_flood", "label": "治水", "value": 11900, "ministry": "mlit" },
+        { "id": "pw_house", "label": "住宅都市環境整備", "value": 7100, "ministry": "mlit" },
+        { "id": "pw_agri", "label": "農業農村整備", "value": 6300, "ministry": "maff" },
+        { "id": "pw_port", "label": "港湾・空港・鉄道等", "value": 5200, "ministry": "mlit" },
+        { "id": "pw_sewer", "label": "下水道・水道等", "value": 4000, "ministry": "mlit" },
+        { "id": "pw_forest", "label": "森林・水産基盤", "value": 3200, "ministry": "maff" },
+        { "id": "pw_other", "label": "その他公共事業", "value": 6928, "ministry": "multi" }
+      ]
+    },
+    {
+      "id": "e_edu", "label": "文教及び科学振興", "value": 54716, "color": "#3b82f6",
+      "children": [
+        { "id": "edu_comp", "label": "義務教育国庫負担金", "value": 15216, "ministry": "mext" },
+        { "id": "edu_sci", "label": "科学技術振興費", "value": 13942, "ministry": "mext",
+          "children": [
+            { "id": "sci_space", "label": "宇宙開発(JAXA等)", "value": 3100, "ministry": "mext" },
+            { "id": "sci_grant", "label": "科研費等競争的資金", "value": 3400, "ministry": "mext" },
+            { "id": "sci_nuclear", "label": "原子力・量子", "value": 1700, "ministry": "mext" },
+            { "id": "sci_life", "label": "ライフサイエンス", "value": 1500, "ministry": "mext" },
+            { "id": "sci_other", "label": "その他科学技術", "value": 4242, "ministry": "multi" }
+          ]
+        },
+        { "id": "edu_assist", "label": "教育振興助成費", "value": 11700, "ministry": "mext" },
+        { "id": "edu_scholar", "label": "育英事業費(奨学金)", "value": 4400, "ministry": "mext" },
+        { "id": "edu_facil", "label": "文教施設費", "value": 1200, "ministry": "mext" },
+        { "id": "edu_other", "label": "その他文教", "value": 8258, "ministry": "multi" }
+      ]
+    },
+    {
+      "id": "e_oth", "label": "その他", "value": 110080, "color": "#8b5cf6",
+      "children": [
+        { "id": "oth_food", "label": "食料安定供給", "value": 11200, "ministry": "maff" },
+        { "id": "oth_res", "label": "予備費", "value": 10000, "ministry": "cao" },
+        { "id": "oth_energy", "label": "エネルギー対策", "value": 8600, "ministry": "env" },
+        { "id": "oth_oda", "label": "経済協力費(ODA)", "value": 5100, "ministry": "multi" },
+        { "id": "oth_local_rev", "label": "地方創生交付金", "value": 1000, "ministry": "cao" },
+        { "id": "oth_sme", "label": "中小企業対策費", "value": 1700, "ministry": "env" },
+        { "id": "oth_tour", "label": "観光庁", "value": 503, "ministry": "mlit",
+          "children": [
+            { "id": "tour_promo", "label": "訪日プロモーション", "value": 178, "ministry": "mlit" },
+            { "id": "tour_env", "label": "受入環境整備(ICT等)", "value": 110, "ministry": "mlit" },
+            { "id": "tour_region", "label": "地方誘客・コンテンツ造成", "value": 85, "ministry": "mlit" },
+            { "id": "tour_sustain", "label": "持続可能な観光地づくり", "value": 50, "ministry": "mlit" },
+            { "id": "tour_domestic", "label": "国内交流等", "value": 45, "ministry": "mlit" },
+            { "id": "tour_other", "label": "その他観光施策", "value": 35, "ministry": "mlit" }
+          ]
+        },
+        { "id": "oth_misc", "label": "その他の事項経費", "value": 71977, "ministry": "multi" }
+      ]
+    }
+  ],
+  "ministries": [
+    { "id": "m_mhlw", "label": "厚生労働省", "value": 335023, "color": "#f97316",
+      "children": [
+        { "id": "mhlw_pen", "label": "年金給付費", "value": 134000, "color": "#fb923c" },
+        { "id": "mhlw_med", "label": "医療給付費", "value": 119700, "color": "#f97316" },
+        { "id": "mhlw_wel", "label": "生活扶助等福祉費", "value": 41300, "color": "#ea580c" },
+        { "id": "mhlw_nur", "label": "介護給付費", "value": 37200, "color": "#c2410c" },
+        { "id": "mhlw_hea", "label": "保健衛生対策費", "value": 2300, "color": "#9a3412" },
+        { "id": "mhlw_emp", "label": "雇用・労災対策", "value": 523, "color": "#7c2d12" }
+      ]
+    },
+    { "id": "m_mof", "label": "財務省", "value": 295000, "color": "#ef4444",
+      "children": [
+        { "id": "mof_redeem", "label": "債務償還費", "value": 176500, "color": "#ef4444" },
+        { "id": "mof_interest", "label": "利払費等", "value": 93500, "color": "#dc2626" },
+        { "id": "mof_grant", "label": "交付税交付金繰入", "value": 11500, "color": "#b91c1c" },
+        { "id": "mof_nta", "label": "国税庁(徴税費)", "value": 7100, "color": "#991b1b" },
+        { "id": "mof_customs", "label": "税関・財務局等", "value": 3500, "color": "#7f1d1d" },
+        { "id": "mof_other", "label": "その他", "value": 2900, "color": "#6b1a1a" }
+      ]
+    },
+    { "id": "m_mic", "label": "総務省", "value": 165000, "color": "#eab308",
+      "children": [
+        { "id": "mic_lat", "label": "地方交付税交付金", "value": 153100, "color": "#eab308" },
+        { "id": "mic_special", "label": "地方特例交付金等", "value": 4000, "color": "#ca8a04" },
+        { "id": "mic_ict", "label": "情報通信(5G等)", "value": 3400, "color": "#a16207" },
+        { "id": "mic_fire", "label": "消防庁", "value": 1700, "color": "#854d0e" },
+        { "id": "mic_other", "label": "統計局・選挙等", "value": 2800, "color": "#713f12" }
+      ]
+    },
+    { "id": "m_mod", "label": "防衛省", "value": 79200, "color": "#22c55e",
+      "children": [
+        { "id": "mod_equip", "label": "装備品取得", "value": 25300, "color": "#22c55e" },
+        { "id": "mod_person", "label": "人件・糧食費", "value": 21900, "color": "#16a34a" },
+        { "id": "mod_maint", "label": "維持整備・弾薬", "value": 13500, "color": "#15803d" },
+        { "id": "mod_rnd", "label": "研究開発費", "value": 7800, "color": "#166534" },
+        { "id": "mod_base", "label": "基地対策・SACO", "value": 5900, "color": "#14532d" },
+        { "id": "mod_facil", "label": "施設整備等", "value": 4800, "color": "#134e28" }
+      ]
+    },
+    { "id": "m_mlit", "label": "国土交通省", "value": 60200, "color": "#14b8a6",
+      "children": [
+        { "id": "mlit_road", "label": "道路整備", "value": 16200, "color": "#14b8a6" },
+        { "id": "mlit_flood", "label": "治水", "value": 11900, "color": "#0d9488" },
+        { "id": "mlit_house", "label": "住宅都市環境", "value": 7100, "color": "#0f766e" },
+        { "id": "mlit_port", "label": "港湾・空港・鉄道等", "value": 5200, "color": "#115e59" },
+        { "id": "mlit_jcg", "label": "海上保安庁", "value": 2500, "color": "#134e4a" },
+        { "id": "mlit_sewer", "label": "下水道・水道等", "value": 4000, "color": "#1a5c57" },
+        { "id": "mlit_tour", "label": "気象庁・観光庁等", "value": 6300, "color": "#1e6e68" },
+        { "id": "mlit_admin", "label": "行政経費等", "value": 7000, "color": "#267a74" }
+      ]
+    },
+    { "id": "m_mext", "label": "文部科学省", "value": 53384, "color": "#3b82f6",
+      "children": [
+        { "id": "mext_compul", "label": "義務教育国庫負担金", "value": 15216, "color": "#3b82f6" },
+        { "id": "mext_sci", "label": "科学技術振興費", "value": 13942, "color": "#2563eb" },
+        { "id": "mext_assist", "label": "教育振興助成費", "value": 11700, "color": "#1d4ed8" },
+        { "id": "mext_scholar", "label": "育英事業(奨学金)", "value": 4400, "color": "#1e40af" },
+        { "id": "mext_culture", "label": "文化庁", "value": 1076, "color": "#1e3a8a" },
+        { "id": "mext_other", "label": "施設費・スポーツ庁等", "value": 7050, "color": "#172e7a" }
+      ]
+    },
+    { "id": "m_cfa", "label": "こども家庭庁", "value": 32649, "color": "#ec4899",
+      "children": [
+        { "id": "cfa_allow", "label": "児童手当", "value": 6800, "color": "#ec4899" },
+        { "id": "cfa_nursery", "label": "保育所等運営費", "value": 9200, "color": "#db2777" },
+        { "id": "cfa_after", "label": "放課後児童クラブ等", "value": 2800, "color": "#be185d" },
+        { "id": "cfa_leave", "label": "育休給付拡充", "value": 1800, "color": "#9d174d" },
+        { "id": "cfa_preg", "label": "妊婦支援給付(10万円)", "value": 750, "color": "#7a1a40" },
+        { "id": "cfa_anyone", "label": "こども誰でも通園", "value": 173, "color": "#6e1838" },
+        { "id": "cfa_other", "label": "その他子育て支援", "value": 11126, "color": "#881848" }
+      ]
+    },
+    { "id": "m_maff", "label": "農林水産省", "value": 22686, "color": "#84cc16",
+      "children": [
+        { "id": "maff_food", "label": "食料安定供給", "value": 11200, "color": "#84cc16" },
+        { "id": "maff_agri", "label": "農業農村整備", "value": 6300, "color": "#65a30d" },
+        { "id": "maff_forest", "label": "森林整備・林業", "value": 2100, "color": "#4d7c0f" },
+        { "id": "maff_fish", "label": "水産基盤", "value": 1800, "color": "#3f6212" },
+        { "id": "maff_other", "label": "その他農政", "value": 1286, "color": "#365314" }
+      ]
+    },
+    { "id": "m_cao", "label": "内閣府・内閣官房政策", "value": 16200, "color": "#a78bfa",
+      "children": [
+        { "id": "cao_police", "label": "警察庁", "value": 3200, "color": "#8b5cf6" },
+        { "id": "cao_okinawa", "label": "沖縄振興費", "value": 2680, "color": "#7c3aed" },
+        { "id": "cao_local", "label": "地方創生交付金", "value": 1000, "color": "#a78bfa" },
+        { "id": "cao_space", "label": "宇宙政策(JAXA等)", "value": 1900, "color": "#6d28d9" },
+        { "id": "cao_disaster", "label": "防災関係", "value": 900, "color": "#5b21b6" },
+        { "id": "cao_other", "label": "金融庁・消費者庁等", "value": 6520, "color": "#4c1d95" }
+      ]
+    },
+    { "id": "m_meti", "label": "経済産業省", "value": 10800, "color": "#f59e0b",
+      "children": [
+        { "id": "meti_energy", "label": "エネルギー対策", "value": 4200, "color": "#f59e0b" },
+        { "id": "meti_sme", "label": "中小企業対策", "value": 1700, "color": "#d97706" },
+        { "id": "meti_trade", "label": "通商・産業政策", "value": 2400, "color": "#b45309" },
+        { "id": "meti_tech", "label": "産業技術・特許庁", "value": 1500, "color": "#92400e" },
+        { "id": "meti_other", "label": "その他", "value": 1000, "color": "#78350f" }
+      ]
+    },
+    { "id": "m_moj", "label": "法務省", "value": 8200, "color": "#64748b",
+      "children": [
+        { "id": "moj_correct", "label": "矯正(刑務所等)", "value": 2700, "color": "#64748b" },
+        { "id": "moj_immig", "label": "出入国在留管理庁", "value": 1400, "color": "#475569" },
+        { "id": "moj_prosec", "label": "検察", "value": 1200, "color": "#334155" },
+        { "id": "moj_other", "label": "法務局・人権等", "value": 2900, "color": "#4b5563" }
+      ]
+    },
+    { "id": "m_mofa", "label": "外務省", "value": 7100, "color": "#06b6d4",
+      "children": [
+        { "id": "mofa_oda", "label": "経済協力(ODA)", "value": 4100, "color": "#06b6d4" },
+        { "id": "mofa_embassy", "label": "在外公館", "value": 1800, "color": "#0891b2" },
+        { "id": "mofa_other", "label": "外交政策等", "value": 1200, "color": "#0e7490" }
+      ]
+    },
+    { "id": "m_digital", "label": "デジタル庁", "value": 4900, "color": "#8b5cf6",
+      "children": [
+        { "id": "digi_sys", "label": "政府情報システム", "value": 3400, "color": "#8b5cf6" },
+        { "id": "digi_mynum", "label": "マイナンバー関連", "value": 1100, "color": "#7c3aed" },
+        { "id": "digi_other", "label": "その他", "value": 400, "color": "#6d28d9" }
+      ]
+    },
+    { "id": "m_recon", "label": "復興庁", "value": 5023, "color": "#78716c",
+      "children": [
+        { "id": "recon_infra", "label": "インフラ復旧", "value": 2200, "color": "#78716c" },
+        { "id": "recon_life", "label": "被災者支援", "value": 1700, "color": "#57534e" },
+        { "id": "recon_other", "label": "産業復興等", "value": 1123, "color": "#44403c" }
+      ]
+    },
+    { "id": "m_env", "label": "環境省", "value": 3400, "color": "#10b981",
+      "children": [
+        { "id": "env_climate", "label": "温暖化対策", "value": 1100, "color": "#10b981" },
+        { "id": "env_nra", "label": "原子力規制委員会", "value": 680, "color": "#065f46" },
+        { "id": "env_waste", "label": "廃棄物・リサイクル", "value": 580, "color": "#059669" },
+        { "id": "env_nature", "label": "自然保護・国立公園", "value": 550, "color": "#047857" },
+        { "id": "env_other", "label": "その他", "value": 490, "color": "#064e3b" }
+      ]
+    },
+    { "id": "m_other", "label": "国会・裁判所等", "value": 11952, "color": "#475569",
+      "children": [
+        { "id": "oth_reserve", "label": "予備費", "value": 6052, "color": "#9ca3af" },
+        { "id": "oth_court", "label": "裁判所", "value": 3300, "color": "#374151" },
+        { "id": "oth_diet", "label": "国会(衆参両院)", "value": 1500, "color": "#475569" },
+        { "id": "oth_etc", "label": "会計検査院・人事院等", "value": 1100, "color": "#6b7280" }
+      ]
+    }
+  ],
+  "functions": [
+    { "id": "f_ss", "label": "社会保障", "value": 376344, "color": "#f97316" },
+    { "id": "f_debt", "label": "国債費", "value": 270009, "color": "#ef4444" },
+    { "id": "f_loc", "label": "地方交付税交付金等", "value": 174547, "color": "#eab308" },
+    { "id": "f_def", "label": "防衛", "value": 79193, "color": "#22c55e" },
+    { "id": "f_pw", "label": "公共事業", "value": 60828, "color": "#14b8a6" },
+    { "id": "f_edu", "label": "文教及び科学振興", "value": 54716, "color": "#3b82f6" },
+    { "id": "f_oth", "label": "その他", "value": 110080, "color": "#8b5cf6" }
+  ]
+}
