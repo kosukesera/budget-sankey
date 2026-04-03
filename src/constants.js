@@ -1,3 +1,8 @@
+export const PAGES = [
+  { key: "explorer", label: "予算フロー", hash: "" },
+  { key: "compare", label: "年度比較", hash: "#compare" },
+];
+
 export const TABS = [
   { key: "func", label: "歳入→歳出（使途別）" },
   { key: "ministry", label: "歳出（省庁別）" },

@@ -1,10 +1,10 @@
 /**
  * Stack nodes vertically, proportional to their value.
  */
-function stackNodes(items, x, nodeWidth, height) {
+function stackNodes(items, x, nodeWidth, height, scaleTotal) {
   const pad = Math.max(3, Math.min(5, height / items.length / 8));
   const usableH = height - 20;
-  const sum = items.reduce((s, i) => s + i.value, 0);
+  const sum = scaleTotal || items.reduce((s, i) => s + i.value, 0);
   const totalPad = pad * (items.length - 1);
   const scale = (usableH - totalPad) / sum;
   let y = 10;
@@ -54,10 +54,10 @@ function calcLinks(left, right) {
  * Full sankey layout calculation.
  * Returns { left, right, links }.
  */
-export function calcLayout(leftItems, rightItems, w, h) {
+export function calcLayout(leftItems, rightItems, w, h, scaleTotal) {
   const nW = w * 0.12;
-  const left = stackNodes(leftItems, 0, nW, h);
-  const right = stackNodes(rightItems, w - nW, nW, h);
+  const left = stackNodes(leftItems, 0, nW, h, scaleTotal);
+  const right = stackNodes(rightItems, w - nW, nW, h, scaleTotal);
   const links = calcLinks(left, right);
   return { left, right, links };
 }

@@ -21,10 +21,12 @@ export default function SankeyView({
   displayMode = "yen",
   setDisplayMode,
   total,
+  scaleTotal,
+  gradientPrefix = "",
 }) {
   const { left, right, links } = useMemo(
-    () => calcLayout(leftItems, rightItems, w, h),
-    [leftItems, rightItems, w, h]
+    () => calcLayout(leftItems, rightItems, w, h, scaleTotal),
+    [leftItems, rightItems, w, h, scaleTotal]
   );
 
   // Compute column sums for percentage display
@@ -92,7 +94,7 @@ export default function SankeyView({
       >
         <defs>
           {links.map((l) => (
-            <linearGradient key={`g${l.id}`} id={`g${l.id}`} x1="0%" x2="100%">
+            <linearGradient key={`g${l.id}`} id={`g${gradientPrefix}${l.id}`} x1="0%" x2="100%">
               <stop offset="0%" stopColor={l.sourceColor} stopOpacity={0.5} />
               <stop offset="100%" stopColor={l.targetColor} stopOpacity={0.5} />
             </linearGradient>
@@ -107,7 +109,7 @@ export default function SankeyView({
             <path
               key={l.id}
               d={`M${l.sx},${l.sy - t} C${mx},${l.sy - t} ${mx},${l.ty - t} ${l.tx},${l.ty - t} L${l.tx},${l.ty + t} C${mx},${l.ty + t} ${mx},${l.sy + t} ${l.sx},${l.sy + t} Z`}
-              fill={`url(#g${l.id})`}
+              fill={`url(#g${gradientPrefix}${l.id})`}
               opacity={isLinkActive(l) ? 0.6 : 0.04}
               style={{ transition: "opacity 0.3s" }}
             />
