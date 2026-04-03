@@ -8,7 +8,8 @@ export const MINISTRY_MAP = {
   mext: { label: "文部科学省", color: "#3b82f6" },
   cfa: { label: "こども家庭庁", color: "#ec4899" },
   maff: { label: "農林水産省", color: "#84cc16" },
-  env: { label: "環境省/経産省等", color: "#8b5cf6" },
+  meti: { label: "経済産業省", color: "#f59e0b" },
+  env: { label: "環境省", color: "#8b5cf6" },
   cao: { label: "内閣府等", color: "#a78bfa" },
   multi: { label: "複数省庁", color: "#94a3b8" },
 };

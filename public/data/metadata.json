@@ -7,6 +7,18 @@
     { "key": "fy2022", "label": "令和4年度（2022）", "file": "fy2022.json" },
     { "key": "fy2021", "label": "令和3年度（2021）", "file": "fy2021.json" },
     { "key": "fy2020", "label": "令和2年度（2020）", "file": "fy2020.json" },
-    { "key": "fy2019", "label": "令和元年度（2019）", "file": "fy2019.json" }
+    { "key": "fy2019", "label": "令和元年度（2019）", "file": "fy2019.json" },
+    { "key": "fy2018", "label": "平成30年度（2018）", "file": "fy2018.json" },
+    { "key": "fy2017", "label": "平成29年度（2017）", "file": "fy2017.json" },
+    { "key": "fy2016", "label": "平成28年度（2016）", "file": "fy2016.json" },
+    { "key": "fy2015", "label": "平成27年度（2015）", "file": "fy2015.json" },
+    { "key": "fy2014", "label": "平成26年度（2014）", "file": "fy2014.json" },
+    { "key": "fy2013", "label": "平成25年度（2013）", "file": "fy2013.json" },
+    { "key": "fy2012", "label": "平成24年度（2012）", "file": "fy2012.json" },
+    { "key": "fy2011", "label": "平成23年度（2011）", "file": "fy2011.json" },
+    { "key": "fy2010", "label": "平成22年度（2010）", "file": "fy2010.json" },
+    { "key": "fy2009", "label": "平成21年度（2009）", "file": "fy2009.json" },
+    { "key": "fy2008", "label": "平成20年度（2008）", "file": "fy2008.json" },
+    { "key": "fy2007", "label": "平成19年度（2007）", "file": "fy2007.json" }
   ]
 }
