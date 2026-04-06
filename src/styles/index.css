@@ -21,3 +21,16 @@ body {
 button {
   font-family: inherit;
 }
+
+select {
+  font-family: inherit;
+}
+
+/* Touch device: hide hover-only hints, show tap hints */
+@media (hover: none) {
+  .hint-hover { display: none !important; }
+  .hint-touch { display: inline !important; }
+}
+@media (hover: hover) {
+  .hint-touch { display: none !important; }
+}

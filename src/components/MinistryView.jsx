@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import allTexts from "../data/texts";
 import { fmt, pct } from "../lib/format";
+import useDims from "../hooks/useDims";
 import SankeyView from "./SankeyView";
 import ContextPanel from "./ContextPanel";
 
@@ -13,20 +14,9 @@ export default function MinistryView({ data, displayMode, setDisplayMode, yearKe
 
   const [hover, setHover] = useState(null);
   const [drill, setDrill] = useState(null);
-  const [dims, setDims] = useState({ w: 960, h: 460 });
-
-  useEffect(() => {
-    const update = () =>
-      setDims({
-        w: Math.min(960, window.innerWidth - 24),
-        h: Math.max(360, Math.min(480, window.innerHeight - 400)),
-      });
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const { w, h } = dims;
+  const { w, h, isMobile } = useDims((vw, vh) =>
+    Math.max(360, Math.min(480, vh - (vw <= 480 ? 320 : 400)))
+  );
 
   // Current view
   const { leftItems, rightItems, drillableIds } = useMemo(() => {
@@ -222,7 +212,7 @@ export default function MinistryView({ data, displayMode, setDisplayMode, yearKe
         )}
       </div>
 
-      <ContextPanel ctx={activeCtx} itemLabel={ctxLabel} itemColor={ctxColor} />
+      <ContextPanel ctx={activeCtx} itemLabel={ctxLabel} itemColor={ctxColor} isMobile={isMobile} />
 
       {/* Hint */}
       <div
@@ -233,15 +223,13 @@ export default function MinistryView({ data, displayMode, setDisplayMode, yearKe
           color: "#475569",
         }}
       >
-        ホバーで解説が切り替わります
+        <span className="hint-hover">ホバーで解説が切り替わります</span>
+        <span className="hint-touch" style={{ display: "none" }}>タップで解説を表示</span>
         {drillableIds.size > 0 && (
           <>
-            {" "}
-            ·{" "}
-            <span style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
-              下線🔍
-            </span>{" "}
-            の省庁はクリックで内訳を展開
+            {" · "}
+            <span className="hint-hover">🔍の省庁はクリックで内訳を展開</span>
+            <span className="hint-touch" style={{ display: "none" }}>🔍の省庁はダブルタップで展開</span>
           </>
         )}
       </div>

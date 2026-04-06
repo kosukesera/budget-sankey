@@ -38,7 +38,7 @@ export default function DiffChart({ oldData, newData, hover, setHover }) {
   if (!items.length) return null;
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: "#e2e8f0", marginBottom: 6 }}>
         歳出の増減
       </div>

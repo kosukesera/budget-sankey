@@ -8,7 +8,7 @@ const ENTRIES = [
   { key: "debate", icon: "\ud83c\udfdb\ufe0f", title: "国会での主な論点" },
 ];
 
-export default function ContextPanel({ ctx, itemLabel, itemColor }) {
+export default function ContextPanel({ ctx, itemLabel, itemColor, isMobile }) {
   return (
     <div
       style={{
@@ -42,14 +42,14 @@ export default function ContextPanel({ ctx, itemLabel, itemColor }) {
           </span>
         </div>
       )}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 0 }}>
         {ENTRIES.map(({ key, icon, title }, i) => (
           <div
             key={key}
             style={{
-              padding: "10px 14px",
-              borderRight: i % 2 === 0 ? "1px solid #1e293b" : "none",
-              borderBottom: i < 2 ? "1px solid #1e293b" : "none",
+              padding: isMobile ? "8px 12px" : "10px 14px",
+              borderRight: !isMobile && i % 2 === 0 ? "1px solid #1e293b" : "none",
+              borderBottom: isMobile ? (i < 3 ? "1px solid #1e293b" : "none") : (i < 2 ? "1px solid #1e293b" : "none"),
             }}
           >
             <div

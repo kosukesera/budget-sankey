@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useBudgetData from "./hooks/useBudgetData";
 import useHashPage from "./hooks/useHashPage";
+import useDims from "./hooks/useDims";
 import { fmt } from "./lib/format";
 import FuncView from "./components/FuncView";
 import MinistryView from "./components/MinistryView";
@@ -13,15 +14,14 @@ export default function App() {
   const [displayMode, setDisplayMode] = useState("yen");
   const [yearKey, setYearKey] = useState("fy2025");
   const { data, loading, error } = useBudgetData(yearKey);
-
-  const w = Math.min(960, typeof window !== "undefined" ? window.innerWidth - 24 : 960);
+  const { w, isMobile } = useDims(() => 0);
 
   return (
     <div
       style={{
         background: "#08090d",
         minHeight: "100vh",
-        padding: "14px 14px 24px",
+        padding: isMobile ? "10px 8px 20px" : "14px 14px 24px",
         boxSizing: "border-box",
       }}
     >
@@ -34,8 +34,8 @@ export default function App() {
           }}>
             <div
               style={{
-                fontSize: 10,
-                letterSpacing: 3,
+                fontSize: isMobile ? 8 : 10,
+                letterSpacing: isMobile ? 2 : 3,
                 color: "#64748b",
                 textTransform: "uppercase",
               }}
@@ -58,8 +58,8 @@ export default function App() {
                     background: page === p.key ? "#1e40af" : "#0f1117",
                     border: "none",
                     color: page === p.key ? "#e2e8f0" : "#64748b",
-                    padding: "4px 14px",
-                    fontSize: 12,
+                    padding: isMobile ? "4px 10px" : "4px 14px",
+                    fontSize: isMobile ? 11 : 12,
                     fontWeight: page === p.key ? 700 : 400,
                     cursor: "pointer",
                     borderRight: i < PAGES.length - 1 ? "1px solid #334155" : "none",
@@ -171,9 +171,9 @@ export default function App() {
                         background: tab === t.key ? "#334155" : "#0f1117",
                         border: "none",
                         color: tab === t.key ? "#e2e8f0" : "#64748b",
-                        padding: "6px 16px",
+                        padding: isMobile ? "5px 12px" : "6px 16px",
                         cursor: "pointer",
-                        fontSize: 13,
+                        fontSize: isMobile ? 12 : 13,
                         fontWeight: tab === t.key ? 700 : 400,
                         borderRight: i === 0 ? "1px solid #334155" : "none",
                       }}

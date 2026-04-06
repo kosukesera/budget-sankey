@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { YEARS } from "../constants";
 import useBudgetData from "../hooks/useBudgetData";
+import useDims from "../hooks/useDims";
 import SankeyView from "./SankeyView";
 import DiffChart from "./DiffChart";
 import { fmt } from "../lib/format";
@@ -17,17 +18,9 @@ export default function CompareView() {
   const [yearKeyB, setYearKeyB] = useState(YEARS[0]?.key || "fy2025");
   const [hover, setHover] = useState(null);
   const [drill, setDrill] = useState(null); // drilled expenditure id (e.g. "e_ss")
-  const [dims, setDims] = useState({ w: 960, h: 380 });
-
-  useEffect(() => {
-    const update = () => setDims({
-      w: Math.min(960, window.innerWidth - 24),
-      h: Math.max(280, Math.min(400, window.innerHeight - 480)),
-    });
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
+  const { w, h, isMobile, isTablet } = useDims((vw, vh) =>
+    Math.max(280, Math.min(400, vh - (vw <= 480 ? 380 : 480)))
+  );
 
   const handleYearA = (key) => { setYearKeyA(key); setDrill(null); };
   const handleYearB = (key) => { setYearKeyB(key); setDrill(null); };
@@ -37,8 +30,8 @@ export default function CompareView() {
   const loading = dataA.loading || dataB.loading;
   const error = dataA.error || dataB.error;
 
-  const isNarrow = dims.w < 700;
-  const sankeyW = isNarrow ? dims.w : Math.floor((dims.w - 16) / 2);
+  const isNarrow = isMobile || isTablet;
+  const sankeyW = isNarrow ? w : Math.floor((w - 16) / 2);
 
   // Drillable IDs: expenditure items that have children in BOTH datasets
   const drillableIds = useMemo(() => {
@@ -237,7 +230,7 @@ export default function CompareView() {
               leftItems={viewA.left}
               rightItems={viewA.right}
               w={sankeyW}
-              h={dims.h}
+              h={h}
               hover={hover}
               setHover={setHover}
               drillableIds={drill ? drillChildIds : drillableIds}
@@ -259,7 +252,7 @@ export default function CompareView() {
               leftItems={viewB.left}
               rightItems={viewB.right}
               w={sankeyW}
-              h={dims.h}
+              h={h}
               hover={hover}
               setHover={setHover}
               drillableIds={drill ? drillChildIds : drillableIds}
@@ -304,7 +297,10 @@ export default function CompareView() {
       <div style={{ marginTop: 8, textAlign: "center", fontSize: 10, color: "#475569" }}>
         {drill
           ? "「← 全体」で全体比較に戻ります"
-          : "項目をクリックで内訳を比較、ホバーで左右が連動します"}
+          : <>
+              <span className="hint-hover">項目をクリックで内訳を比較、ホバーで左右が連動します</span>
+              <span className="hint-touch" style={{ display: "none" }}>ダブルタップで内訳を比較、タップで左右が連動します</span>
+            </>}
       </div>
     </div>
   );

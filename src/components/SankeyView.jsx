@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef, useCallback } from "react";
 import { calcLayout } from "../lib/layout";
 import { fmt, pct } from "../lib/format";
 import SearchIcon from "./SearchIcon";
@@ -56,6 +56,24 @@ export default function SankeyView({
 
   const canDrillHovered = hoveredNode && drillableIds?.has(hoveredNode.id);
 
+  // Touch support: tap = hover toggle, double-tap = drill
+  const lastTapRef = useRef({ id: null, time: 0 });
+  const handleTouch = useCallback(
+    (id, canDrill, e) => {
+      e.preventDefault(); // suppress ghost click
+      const now = Date.now();
+      const last = lastTapRef.current;
+      if (last.id === id && now - last.time < 300 && canDrill) {
+        onDrill(id);
+        lastTapRef.current = { id: null, time: 0 };
+      } else {
+        setHover((prev) => (prev === id ? null : id));
+        lastTapRef.current = { id, time: now };
+      }
+    },
+    [onDrill, setHover]
+  );
+
   // Position tooltip to the inside of the diagram, away from the node
   const tooltipPos = useMemo(() => {
     if (!hoveredNode) return null;
@@ -91,6 +109,9 @@ export default function SankeyView({
           border: "1px solid #1e293b",
         }}
         onMouseLeave={() => setHover(null)}
+        onTouchStart={(e) => {
+          if (e.target === e.currentTarget) setHover(null);
+        }}
       >
         <defs>
           {links.map((l) => (
@@ -122,13 +143,13 @@ export default function SankeyView({
           const canDrill = drillableIds?.has(nd.id);
           const fs = Math.min(13, Math.max(8.5, nd.height * 0.32));
           const labelY = nd.y + nd.height / 2 - (nd.height > 36 ? 7 : 0);
-          const approxTextW = nd.label.length * fs * 0.55;
 
           return (
             <g
               key={nd.id}
               onMouseEnter={() => setHover(nd.id)}
               onClick={canDrill ? () => onDrill(nd.id) : undefined}
+              onTouchStart={(e) => handleTouch(nd.id, canDrill, e)}
               style={{ cursor: canDrill ? "pointer" : "default" }}
             >
               <rect
@@ -160,19 +181,6 @@ export default function SankeyView({
                   >
                     {nd.label}
                   </text>
-
-                  {canDrill && (
-                    <line
-                      x1={nd.x + nd.width / 2 - approxTextW / 2}
-                      y1={labelY + fs * 0.55}
-                      x2={nd.x + nd.width / 2 + approxTextW / 2}
-                      y2={labelY + fs * 0.55}
-                      stroke="#fff"
-                      strokeWidth={0.8}
-                      opacity={active ? 0.7 : 0.12}
-                      style={{ transition: "opacity 0.3s", pointerEvents: "none" }}
-                    />
-                  )}
 
                   {canDrill && (
                     <SearchIcon

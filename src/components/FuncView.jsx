@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { MINISTRY_MAP } from "../data/ministries";
 import allTexts from "../data/texts";
 import { TABS } from "../constants";
 import { fmt, pct } from "../lib/format";
+import useDims from "../hooks/useDims";
 import SankeyView from "./SankeyView";
 import ContextPanel from "./ContextPanel";
 import Breadcrumb from "./Breadcrumb";
@@ -16,18 +17,9 @@ export default function FuncView({ data, displayMode, setDisplayMode, yearKey })
 
   const [hover, setHover] = useState(null);
   const [path, setPath] = useState([]);
-  const [dims, setDims] = useState({ w: 960, h: 480 });
-
-  useEffect(() => {
-    const update = () =>
-      setDims({
-        w: Math.min(960, window.innerWidth - 24),
-        h: Math.max(380, Math.min(520, window.innerHeight - 380)),
-      });
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
+  const { w, h, isMobile } = useDims((vw, vh) =>
+    Math.max(320, Math.min(520, vh - (vw <= 480 ? 300 : 380)))
+  );
 
   // Current view items
   const currentView = useMemo(() => {
@@ -100,7 +92,6 @@ export default function FuncView({ data, displayMode, setDisplayMode, yearKey })
     idx < 0 ? setPath([]) : setPath(path.slice(0, idx + 1));
   };
 
-  const { w, h } = dims;
   const { leftItems, rightItems, leftLabel, rightLabel } = currentView;
 
   // Find context for hover
@@ -293,7 +284,7 @@ export default function FuncView({ data, displayMode, setDisplayMode, yearKey })
         )}
       </div>
 
-      <ContextPanel ctx={activeCtx} itemLabel={ctxLabel} itemColor={ctxColor} />
+      <ContextPanel ctx={activeCtx} itemLabel={ctxLabel} itemColor={ctxColor} isMobile={isMobile} />
 
       {/* Hint */}
       <div
@@ -304,15 +295,13 @@ export default function FuncView({ data, displayMode, setDisplayMode, yearKey })
           color: "#475569",
         }}
       >
-        ホバーで解説が切り替わります
+        <span className="hint-hover">ホバーで解説が切り替わります</span>
+        <span className="hint-touch" style={{ display: "none" }}>タップで解説を表示</span>
         {drillableIds.size > 0 && (
           <>
-            {" "}
-            ·{" "}
-            <span style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
-              下線付き🔍
-            </span>{" "}
-            の項目はクリックでさらに展開
+            {" · "}
+            <span className="hint-hover">🔍の項目はクリックで展開</span>
+            <span className="hint-touch" style={{ display: "none" }}>🔍の項目はダブルタップで展開</span>
           </>
         )}
       </div>
